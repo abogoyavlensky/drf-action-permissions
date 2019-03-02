@@ -3,12 +3,43 @@ name = "drf-action-permissions"
 version = "0.1.0"
 description = "Flexible action level permissions for Django REST framework"
 authors = ["Andrey Bogoyavlensky <abogoyavlensky@gmail.com>"]
+license = "MIT"
+readme = 'README.md'
+homepage = "https://github.com/abogoyavlensky/drf-action-permissions"
+repository = "https://github.com/abogoyavlensky/drf-action-permissions"
+documentation = "https://github.com/abogoyavlensky/drf-action-permissions/blob/master/README.md"
+keywords = ['permissions', 'django', 'djangorestframework', 'drf', 'viewset']
 
 [tool.poetry.dependencies]
 python = "^3.6"
+djangorestframework = { version = "^3.7" }
+django = { version = ">=1.11" }
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
+isort = "^4.3"
+autoflake = "^1.2"
+black = "=18.9b0"
+pytest-mock = "^1.10"
+coverage = "^4.5"
+pytest-cov = "^2.6"
+pytest-watch = "^4.2"
+mypy = "^0.670.0"
+xenon = "^0.5.5"
+pytest-django = "^3.4"
+tox = "^3.7"
+tox-travis = "^0.11.0"
+codecov = "^2.0"
+
+[tool.black]
+line-length = 79
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+line_length = 79
 
 [build-system]
 requires = ["poetry>=0.12"]

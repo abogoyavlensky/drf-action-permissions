@@ -1,0 +1,19 @@
+# http://editorconfig.org
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.py]
+indent_size = 4
+line_length=79
+known_first_party=drf-action-permissions
+multi_line_output=3
+default_section=THIRDPARTY
+
+[Makefile]
+indent_style = tab

@@ -1,0 +1,35 @@
+language: python
+dist: xenial
+sudo: required
+python:
+    - "3.6"
+    - "3.7"
+
+cache:
+  pip: true
+  directories:
+    - $HOME/.cache/pypoetry
+
+env:
+    - DJANGO=1.11
+    - DJANGO=2.0
+    - DJANGO=2.1
+
+matrix:
+    fast_finish: true
+
+install:
+    - pip install poetry
+    - poetry -V
+    - poetry config settings.virtualenvs.create false
+    - poetry install -v
+
+script:
+    - tox
+    - make lint
+
+after_success:
+    - codecov -e TOXENV,DJANGO
+
+notifications:
+    email: false
