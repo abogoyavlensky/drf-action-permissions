@@ -41,8 +41,8 @@ class DjangoActionPermissions(DjangoModelPermissions):
         "GET": [],
         "OPTIONS": [],
         "HEAD": [],
-        "POST": [],
-        "PUT": [],
+        "POST": ["%(app_label)s.add_%(model_name)s"],
+        "PUT": ["%(app_label)s.change_%(model_name)s"],
         "PATCH": ["%(app_label)s.change_%(model_name)s"],
         "DELETE": ["%(app_label)s.delete_%(model_name)s"],
     }
@@ -112,5 +112,5 @@ class DjangoActionPermissions(DjangoModelPermissions):
         return result and self.has_action_permission(request, view)
 
     def has_object_permission(self, request, view, obj):
-        """Apply action permission without object and with ignoring method."""
+        """Apply action permission with object and with ignoring method."""
         return self.has_action_permission(request, view, obj)
