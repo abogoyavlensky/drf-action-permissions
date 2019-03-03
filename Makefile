@@ -25,8 +25,6 @@ lint:
 	@isort -rc $(PEP8_CLEANED)
 	@$(INFO) "Linting..."
 	@autoflake --in-place --recursive $(PEP8_CLEANED)
-	@$(INFO) "Checking types..."
-	@mypy --ignore-missing-imports --disallow-untyped-defs $(PEP8_CLEANED)
 	@$(INFO) "Checking complexity..."
 	@xenon --max-absolute B --max-modules A --max-average A $(PEP8_CLEANED)
 
