@@ -33,13 +33,15 @@ REST_FRAMEWORK = {
 }
 ```
 
-Or use it just for particular view or viewset in combination with others:
+Or use it just for particular viewset in combination with others:
 
 ```python
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
+
 from drf_action_permissions import DjangoActionPermissions
 
-class MyView(APIView):
+class MyView(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, DjangoActionPermissions)
     perms_map_action = {
         'retrieve': ['users.view_user'],
