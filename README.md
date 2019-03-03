@@ -20,3 +20,87 @@ It can be a plain string or a function.
 ```bash
 $ pip install drf-common-exceptions
 ```
+
+You cound define common permissions class for whole project:
+
+```
+REST_FRAMEWORK = {
+    ...
+    "DEFAULT_PERMISSION_CLASSES": (
+        "drf_action_permissions.DjangoActionPermissions",
+    )
+    ...
+}
+```
+
+Or use it just for particular view or viewset in combination with others:
+
+```python
+from rest_framework.permissions import IsAuthenticated
+from drf_action_permissions import DjangoActionPermissions
+
+class MyView(APIView):
+    permission_classes = (IsAuthenticated, DjangoActionPermissions)
+    perms_map_action = {
+        'retrieve': ['users.view_user'],
+    }
+```
+
+## Usage examples
+
+Permission as string template or plain string:
+```python
+class PostViewSet(ModelViewSet):
+    permission_classes = (IsAuthenticated, DjangoActionPermissions)
+    perms_map_action = {
+        'likes': ['%(app_label)s.view_%(model_name)s_list',
+                  '%(app_label)s.view_like_list'],
+    }
+```
+
+Permission as function with current object access:
+```python
+def can_view_application(user, _view, obj):
+    """Can view only archived applications."""
+    if obj.is_archived:
+        return user.has_perm('applications.view_archived_application')
+    return user.has_perm('applications.view_application')
+
+
+class ApplicationView(ModelViewSet):
+    permission_classes = (IsAuthenticated, DjangoActionPermissions)
+    perms_map_action_obj = {
+        'retrieve': [can_view_application],
+    }
+```
+
+
+## Development
+
+Install poetry and requirements:
+
+```bash
+$ curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+$ python3 -m venv path/to/venv
+$ source path/to/venv/bin/activate
+$ poetry install
+```
+
+Run main commands:
+
+```bash
+$ make test
+$ make watch
+$ make clean
+$ make lint
+```
+
+Publish to pypi by default patch version:
+```bash
+$ make publish
+```
+
+or any level you want:
+```bash
+$ make publish minor
+```
