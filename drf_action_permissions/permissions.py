@@ -49,7 +49,7 @@ class DjangoActionPermissions(DjangoModelPermissions):
     perms_map_action = {
         "retrieve": ["%(app_label)s.view_%(model_name)s"],
         "list": ["%(app_label)s.view_%(model_name)s_list"],
-        "create": ["%(app_label)s.change_%(model_name)s"],
+        "create": ["%(app_label)s.add_%(model_name)s"],
         "update": ["%(app_label)s.change_%(model_name)s"],
     }
 
