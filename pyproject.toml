@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "drf-action-permissions"
-version = "0.1.0"
+version = "0.1.1"
 description = "Flexible action level permissions for Django REST framework"
 authors = ["Andrey Bogoyavlensky <abogoyavlensky@gmail.com>"]
 license = "MIT"
